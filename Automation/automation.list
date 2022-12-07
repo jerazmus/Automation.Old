@@ -1,0 +1,6 @@
+SL_URL=https://www.saucedemo.com
+SL_STANDARD_USER=standard_user
+SL_LOCKED_OUT_USER=locked_out_user
+SL_PROBLEM_USER=problem_user
+SL_PERFORMANCE_GLITCH_USER=performance_glitch_user
+SL_PASSWORD=secret_sauce
