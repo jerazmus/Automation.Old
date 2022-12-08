@@ -39,7 +39,7 @@ namespace Automation.Core.SwagLabs.UI.Pages
 
         // ---------------------------------------
 
-        // Login method (using default values from automation.list file)
+        // Login method (using default values from 'automation.list' file)
         public LoginPage Login(string username = "standard_user", string password = "secret_sauce")
         {
             Type(Username, username);

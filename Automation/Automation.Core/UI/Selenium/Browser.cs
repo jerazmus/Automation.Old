@@ -6,6 +6,7 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Safari;
 using OpenQA.Selenium;
+using Automation.Core.Settings;
 
 namespace Automation.Core.UI.Selenium
 {
@@ -29,9 +30,9 @@ namespace Automation.Core.UI.Selenium
             {
                 case BrowserType.Chrome:
                     var chromeOptions = new ChromeOptions();
-                    chromeOptions.AddArguments("--start-maximized");
-                    chromeOptions.AddArguments("--disable-notifications");
-                    chromeOptions.AddArguments("--lang=pl");
+                    chromeOptions.AddArguments(TestSettings.BrowserResolution);
+                    chromeOptions.AddArguments(TestSettings.LanguageInfo);
+                    chromeOptions.AddArguments(TestSettings.Headless);
                     return new ChromeDriver(Environment.CurrentDirectory, chromeOptions);
                 case BrowserType.Firefox:
                     return new FirefoxDriver();

@@ -4,6 +4,10 @@ namespace Automation.Core.SwagLabs.Settings
 {
     public class SwagLabsTestSettings : TestSettings
     {
+        public SwagLabsTestSettings(string settingsFilePath) : base(settingsFilePath)
+        {
+        } 
+
         // 
         // Variables that take values from automation.list file
         //

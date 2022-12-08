@@ -7,6 +7,9 @@ namespace Automation.Core.Settings
     {
         private static ConcurrentDictionary<Type, TestSettings> _variables = new();
 
+        // ---------------------------------------
+
+        // Creates instance of TestSettings object based on the settings file ('automation.list')
         public static T Get<T>() where T : TestSettings
         {
             return (T)_variables.GetOrAdd(typeof(T), (type) =>
