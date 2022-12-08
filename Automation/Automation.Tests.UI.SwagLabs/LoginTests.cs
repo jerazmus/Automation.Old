@@ -14,7 +14,7 @@ namespace Automation.Tests.UI.SwagLabs
             LoginPage.Open();
 
             // When
-            LoginPage.Login();
+            LoginPage.Login(Settings.StandardUser, Settings.Password);
 
             // Then
             AssertUrlContains("inventory");
