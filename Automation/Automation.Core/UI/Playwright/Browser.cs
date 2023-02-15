@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Automation.Core.UI.Selenium;
 using Automation.Core.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
@@ -7,46 +7,15 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Safari;
 using OpenQA.Selenium;
 
-namespace Automation.Core.UI.Selenium
+namespace Automation.Core.UI.Playwright
 {
-    public class Browser : IBrowserActions
+    internal class Browser : IBrowserActions
     {
-        static IWebDriver _driver;
-
-        public static string LanguageInfo = "--lang=pl";
-        public static string BrowserResolution = "--start-maximized";
-        public static string Headless = "headless";
-
-        // ---------------------------------------
-
-        public Browser(BrowserType browserType)
+        public Browser()
         {
-            _driver = SetBrowser(browserType);
         }
 
         // ---------------------------------------
-
-        // Sets up browser driver + it's options
-        public IWebDriver SetBrowser(BrowserType type)
-        {
-            switch (type)
-            {
-                case BrowserType.Chrome:
-                    var chromeOptions = new ChromeOptions();
-                    chromeOptions.AddArguments(LanguageInfo);
-                    chromeOptions.AddArguments(BrowserResolution);
-                    chromeOptions.AddArguments(Headless);
-                    return new ChromeDriver(Environment.CurrentDirectory, chromeOptions);
-                case BrowserType.Firefox:
-                    return new FirefoxDriver();
-                case BrowserType.Safari:
-                    return new SafariDriver();
-                case BrowserType.Edge:
-                    return new EdgeDriver();
-                default:
-                    return new ChromeDriver();
-            }
-        }
 
         // Allows to live log every action during test progress and chain call another methods
         public IBrowserActions Execute(string log, Action action)
@@ -75,7 +44,6 @@ namespace Automation.Core.UI.Selenium
         {
             return Execute($"Click '{xpath}'", () =>
             {
-                _driver.FindElement(By.XPath(xpath)).Click();
             });
         }
 
@@ -83,7 +51,6 @@ namespace Automation.Core.UI.Selenium
         {
             return Execute($"Type '{text}' into '{xpath}'", () =>
             {
-                _driver.FindElement(By.XPath(xpath)).SendKeys(text);
             });
         }
 
@@ -91,7 +58,6 @@ namespace Automation.Core.UI.Selenium
         {
             return Execute($"Navigate to {url}", () =>
             {
-                _driver.Navigate().GoToUrl(url);
             });
         }
 
@@ -99,7 +65,6 @@ namespace Automation.Core.UI.Selenium
         {
             return Execute($"Go back", () =>
             {
-                _driver.Navigate().Back();
             });
         }
 
@@ -107,7 +72,6 @@ namespace Automation.Core.UI.Selenium
         {
             return Execute($"Go forward", () =>
             {
-                _driver.Navigate().Forward();
             });
         }
 
@@ -115,7 +79,6 @@ namespace Automation.Core.UI.Selenium
         {
             return Execute($"Close browser", () =>
             {
-                _driver.Close();
             });
         }
 
@@ -123,7 +86,6 @@ namespace Automation.Core.UI.Selenium
         {
             return Execute($"Assert URL contains '{expectedValue}'", () =>
             {
-                _driver.Url.Should().Contain(expectedValue);
             });
         }
 
@@ -131,7 +93,6 @@ namespace Automation.Core.UI.Selenium
         {
             return Execute($"Assert element '{xpath}' has text '{expectedValue}'", () =>
             {
-                _driver.FindElement(By.XPath(xpath)).Text.Should().Be(expectedValue);
             });
         }
 
@@ -139,7 +100,6 @@ namespace Automation.Core.UI.Selenium
         {
             return Execute($"Assert element is displayed '{xpath}'", () =>
             {
-                _driver.FindElement(By.XPath(xpath)).Displayed.Should().BeTrue();
             });
         }
 
@@ -147,15 +107,6 @@ namespace Automation.Core.UI.Selenium
         {
             return Execute($"Assert element is not displayed '{xpath}'", () =>
             {
-                try
-                {
-                    _driver.FindElement(By.XPath(xpath));
-                }
-                catch (NoSuchElementException)
-                {
-                    TestLogger.Log("NoSuchElementException is taken as true");
-                    Assert.True(true);
-                }
             });
         }
         #endregion

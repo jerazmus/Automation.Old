@@ -4,13 +4,6 @@ namespace Automation.Core.Settings
 {
     public class TestSettings
     {
-
-        public static string LanguageInfo = "--lang=pl";
-        public static string BrowserResolution = "--start-maximized";
-        public static string Headless = "headless";
-
-        // ---------------------------------------
-
         public TestSettings(string settingsFilePath)
         {
             var fileVariables = ReadSettingsFile(settingsFilePath);

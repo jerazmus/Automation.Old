@@ -1,4 +1,4 @@
-﻿namespace Automation.Core.UI.Selenium
+﻿namespace Automation.Core.UI.Playwright
 {
     public interface IBrowserActions
     {
