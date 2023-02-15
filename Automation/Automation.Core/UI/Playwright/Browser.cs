@@ -1,11 +1,5 @@
-﻿using Automation.Core.UI.Selenium;
-using Automation.Core.Utilities;
+﻿using Automation.Core.Utilities;
 using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Safari;
-using OpenQA.Selenium;
 
 namespace Automation.Core.UI.Playwright
 {
@@ -35,7 +29,7 @@ namespace Automation.Core.UI.Playwright
         // ---------------------------------------
 
         //
-        // Implementation of IBrowserActions interface using Selenium WebDriver
+        // Implementation of IBrowserActions interface using Playwright
         //
 
         #region Browser Actions
