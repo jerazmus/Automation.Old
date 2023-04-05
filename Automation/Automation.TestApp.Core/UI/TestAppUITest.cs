@@ -1,14 +1,14 @@
 ﻿using Automation.Core.Settings;
-using Automation.Core.SwagLabs.Settings;
-using Automation.Core.SwagLabs.UI.Pages;
 using Automation.Core.UI;
+using Automation.TestApp.Core.Settings;
+using Automation.TestApp.Core.UI.Pages;
 
-namespace Automation.Core.SwagLabs.UI
+namespace Automation.TestApp.Core.UI
 {
-    public abstract class SwagLabsUITest : UITest
+    public abstract class TestAppUITest : UITest
     {
         // Get variables from SwagLabsTestSettings in a form of dictionary
-        public SwagLabsTestSettings Settings { get; } = TestSettingsProvider.Get<SwagLabsTestSettings>();
+        public TestAppTestSettings Settings { get; } = TestSettingsProvider.Get<TestAppTestSettings>();
 
         // ---------------------------------------
 
@@ -24,7 +24,7 @@ namespace Automation.Core.SwagLabs.UI
         // Instances of any page in SwagLabs project
         //
 
-        protected LoginPage LoginPage 
+        protected LoginPage LoginPage
             => GetSwagLabsPage<LoginPage>();
     }
 }

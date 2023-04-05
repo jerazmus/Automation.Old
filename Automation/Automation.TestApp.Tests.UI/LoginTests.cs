@@ -1,13 +1,12 @@
-﻿using Automation.Core.SwagLabs.UI;
-using Automation.Core.SwagLabs.UI.Pages;
+﻿using Automation.TestApp.Core.UI;
 using NUnit.Framework;
 
-namespace Automation.Tests.UI.SwagLabs
+namespace Automation.TestApp.Tests.UI
 {
-    public class LoginTests : SwagLabsUITest
+    public class LoginTests : TestAppUITest
     {
-        [Category("Login-Tests-01")]
         [Test]
+        [Category("Login-Tests-01")]
         public void Login_Correct()
         {
             // Given
@@ -20,8 +19,8 @@ namespace Automation.Tests.UI.SwagLabs
             AssertUrlContains("inventory");
         }
 
-        [Category("Login-Tests-02")]
         [Test]
+        [Category("Login-Tests-02")]
         public void Login_Validation()
         {
             //Given

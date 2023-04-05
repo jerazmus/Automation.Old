@@ -1,4 +1,6 @@
-﻿using Automation.Core.UI.Selenium;
+﻿using Automation.Core.Settings;
+using Automation.Core.UI.Playwright;
+//using Automation.Core.UI.Selenium;
 using Automation.Core.Utilities;
 using NUnit.Framework;
 
@@ -17,7 +19,14 @@ namespace Automation.Core.UI
         [OneTimeSetUp]
         public void Setup()
         {
-            _browser = new Browser(BrowserType.Chrome);
+            // Selenium Browser
+            //_browser = new Browser(BrowserType.Chrome);
+
+            // Playwright Browser
+            var settings = TestSettingsProvider.Get<TestSettings>();
+            var browserContext = Provider.Create(settings.UIHeadless);
+            _browser = new Browser(browserContext);
+
             TestLogger.Log("Open browser");
         }
 
@@ -54,6 +63,16 @@ namespace Automation.Core.UI
             return _browser.Type(xpath, text);
         }
 
+        public IBrowserActions Check(string xpath, bool check)
+        {
+            return _browser.Check(xpath, check);
+        }
+
+        public IBrowserActions SelectOption(string menuXpath, string optionXpath)
+        {
+            return _browser.SelectOption(menuXpath, optionXpath);
+        }
+
         public IBrowserActions NavigateToUrl(string url)
         {
             return _browser.NavigateToUrl(url);
@@ -79,9 +98,9 @@ namespace Automation.Core.UI
             return _browser.AssertUrlContains(expectedValue);
         }
 
-        public IBrowserActions AssertTextEquals(string xpath, string expectedValue)
+        public IBrowserActions AssertTextEquals(string xpath, string expectedValue, bool isPartialText = false, bool trim = false, bool onlyTextContent = false)
         {
-            return _browser.AssertTextEquals(xpath, expectedValue);
+            return _browser.AssertTextEquals(xpath, expectedValue, isPartialText, trim, onlyTextContent);
         }
 
         public IBrowserActions AssertIsDisplayed(string xpath)

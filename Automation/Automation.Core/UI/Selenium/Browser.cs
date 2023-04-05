@@ -87,6 +87,16 @@ namespace Automation.Core.UI.Selenium
             });
         }
 
+        public IBrowserActions Check(string xpath, bool check)
+        { 
+            return this;
+        }
+
+        public IBrowserActions SelectOption(string menuXpath, string optionXPath)
+        {
+            return this;
+        }
+
         public IBrowserActions NavigateToUrl(string url)
         {
             return Execute($"Navigate to {url}", () =>
@@ -127,11 +137,11 @@ namespace Automation.Core.UI.Selenium
             });
         }
 
-        public IBrowserActions AssertTextEquals(string xpath, string expectedValue)
+        public IBrowserActions AssertTextEquals(string xpath, string expectedText, bool isPartialText = false, bool trim = false, bool onlyTextContent = false)
         {
-            return Execute($"Assert element '{xpath}' has text '{expectedValue}'", () =>
+            return Execute($"Assert element '{xpath}' has text '{expectedText}'", () =>
             {
-                _driver.FindElement(By.XPath(xpath)).Text.Should().Be(expectedValue);
+                _driver.FindElement(By.XPath(xpath)).Text.Should().Be(expectedText);
             });
         }
 

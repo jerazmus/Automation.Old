@@ -1,8 +1,7 @@
 ﻿using Automation.Core.UI;
-using Automation.Core.UI.Selenium;
 using Automation.Core.Utilities;
 
-namespace Automation.Core.SwagLabs.UI.Pages
+namespace Automation.TestApp.Core.UI.Pages
 {
     public class LoginPage : Page
     {
@@ -25,7 +24,7 @@ namespace Automation.Core.SwagLabs.UI.Pages
         //
         // XPaths for page's elements
         //
-        
+
         public string Username
             => XPath.Element("username");
         public string Password

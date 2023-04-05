@@ -1,3 +1,4 @@
+AT_UI_HEADLESS=False
 SL_URL=https://www.saucedemo.com
 SL_STANDARD_USER=standard_user
 SL_LOCKED_OUT_USER=locked_out_user

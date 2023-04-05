@@ -1,12 +1,23 @@
 ﻿using Automation.Core.Utilities;
+using FluentAssertions;
+using Microsoft.Playwright;
 using NUnit.Framework;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Automation.Core.UI.Playwright
 {
     internal class Browser : IBrowserActions
     {
-        public Browser()
+        private IBrowserContext _context;
+
+        private IPage _page;
+
+        // ---------------------------------------
+
+        public Browser(IBrowserContext context)
         {
+            _context = context;
+            _page = _context.NewPageAsync().Result;
         }
 
         // ---------------------------------------
@@ -38,6 +49,7 @@ namespace Automation.Core.UI.Playwright
         {
             return Execute($"Click '{xpath}'", () =>
             {
+                _page.ClickAsync(xpath).Wait();
             });
         }
 
@@ -45,6 +57,32 @@ namespace Automation.Core.UI.Playwright
         {
             return Execute($"Type '{text}' into '{xpath}'", () =>
             {
+                _page.FillAsync(xpath, text ?? string.Empty).Wait();
+            });
+        }
+
+        public IBrowserActions Check(string xpath, bool check)
+        {
+            var checkValue = _page.GetAttributeAsync(xpath, "aria-checked").Result;
+            if ((check && checkValue == "false") || (!check && checkValue == "true"))
+            {
+                _page.ClickAsync(xpath).Wait();
+            }
+
+            while (_page.GetAttributeAsync(xpath, "aria-checked").Result != check.ToString().ToLower())
+            {
+                _page.ClickAsync(xpath).Wait();
+            }
+
+            return this;
+        }
+
+        public IBrowserActions SelectOption(string menuXpath, string optionXPath)
+        {
+            return Execute($"Selecct option '{optionXPath}' from menu '{menuXpath}'", () =>
+            {
+                _page.ClickAsync(menuXpath).Wait();
+                _page.ClickAsync(optionXPath).Wait();
             });
         }
 
@@ -52,6 +90,7 @@ namespace Automation.Core.UI.Playwright
         {
             return Execute($"Navigate to {url}", () =>
             {
+                _page.GotoAsync(url).Wait();
             });
         }
 
@@ -59,6 +98,7 @@ namespace Automation.Core.UI.Playwright
         {
             return Execute($"Go back", () =>
             {
+                _page.GoBackAsync().Wait();
             });
         }
 
@@ -66,6 +106,7 @@ namespace Automation.Core.UI.Playwright
         {
             return Execute($"Go forward", () =>
             {
+                _page.GoForwardAsync().Wait();
             });
         }
 
@@ -73,6 +114,7 @@ namespace Automation.Core.UI.Playwright
         {
             return Execute($"Close browser", () =>
             {
+                _page.CloseAsync().Wait();
             });
         }
 
@@ -80,13 +122,32 @@ namespace Automation.Core.UI.Playwright
         {
             return Execute($"Assert URL contains '{expectedValue}'", () =>
             {
+                _page.Url.Should().Contain(expectedValue);
             });
         }
 
-        public IBrowserActions AssertTextEquals(string xpath, string expectedValue)
+        public IBrowserActions AssertTextEquals(string xpath, string expectedText, bool isPartialText = false, bool trim = false, bool onlyTextContent = false)
         {
-            return Execute($"Assert element '{xpath}' has text '{expectedValue}'", () =>
+            return Execute($"Assert element '{xpath}' has text '{expectedText}'", () =>
             {
+                expectedText = expectedText ?? string.Empty;
+                var elementVisibilityState = string.IsNullOrWhiteSpace(expectedText) 
+                    ? WaitForSelectorState.Attached 
+                    : WaitForSelectorState.Visible;
+
+                var actualText = GetText(xpath, elementVisibilityState, onlyTextContent);
+
+                actualText = trim ? actualText.Trim() : actualText;
+                expectedText = trim ? expectedText.Trim() : expectedText;
+
+                if (isPartialText)
+                {
+                    actualText.Should().Contain(expectedText);
+                }
+                else
+                {
+                    actualText.Should().Be(expectedText);
+                }
             });
         }
 
@@ -94,6 +155,9 @@ namespace Automation.Core.UI.Playwright
         {
             return Execute($"Assert element is displayed '{xpath}'", () =>
             {
+                var element = WaitForVisibleElement(xpath);
+                var isDisplayed = element.IsVisibleAsync().Result;
+                isDisplayed.Should().BeTrue();
             });
         }
 
@@ -101,8 +165,43 @@ namespace Automation.Core.UI.Playwright
         {
             return Execute($"Assert element is not displayed '{xpath}'", () =>
             {
+                _page.WaitForSelectorAsync(xpath, new PageWaitForSelectorOptions()
+                {
+                    State = WaitForSelectorState.Hidden
+                }).Wait();
+
+                var isHidden = _page.IsHiddenAsync(xpath).Result;
+                isHidden.Should().BeTrue();
             });
         }
         #endregion
+
+        // ---------------------------------------
+
+        //
+        // Suplementary methods
+        //
+
+        // Manual wait for element
+        private IElementHandle WaitForVisibleElement(string xpath, WaitForSelectorState state = WaitForSelectorState.Visible)
+        {
+            return _page.WaitForSelectorAsync(xpath, new PageWaitForSelectorOptions()
+            {
+                State = state
+            }).Result;
+        }
+
+        // Get element's text
+        public string GetText(string name, WaitForSelectorState expectedState, bool onlyTextContent = false)
+        {
+            var element = WaitForVisibleElement(name, expectedState);
+            var innerText = element.InnerTextAsync().Result ?? string.Empty;
+            var textContent = element.TextContentAsync().Result ?? string.Empty;
+            return onlyTextContent
+                ? textContent
+                : innerText.Trim().Contains(textContent.Trim(), StringComparison.OrdinalIgnoreCase)
+                    ? innerText
+                    : textContent + innerText;
+        }
     }
 }

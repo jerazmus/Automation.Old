@@ -1,12 +1,12 @@
 ﻿using Automation.Core.Settings;
 
-namespace Automation.Core.SwagLabs.Settings
+namespace Automation.TestApp.Core.Settings
 {
-    public class SwagLabsTestSettings : TestSettings
+    public class TestAppTestSettings : TestSettings
     {
-        public SwagLabsTestSettings(string settingsFilePath) : base(settingsFilePath)
+        public TestAppTestSettings(string settingsFilePath) : base(settingsFilePath)
         {
-        } 
+        }
 
         // 
         // Variables that take values from automation.list file

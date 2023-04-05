@@ -4,6 +4,9 @@ namespace Automation.Core.Settings
 {
     public class TestSettings
     {
+        [TestVariable("AT_UI_HEADLESS")]
+        public bool UIHeadless { get; set; }
+
         public TestSettings(string settingsFilePath)
         {
             var fileVariables = ReadSettingsFile(settingsFilePath);

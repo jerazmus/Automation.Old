@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,24 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\automation.list" Link="automation.list">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.8.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
+    <PackageReference Include="Microsoft.Playwright" Version="1.32.0" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.3.1" />
     <PackageReference Include="Selenium.Support" Version="4.7.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.7.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="108.0.5359.7100" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Automation.Core.SwagLabs\Automation.Core.SwagLabs.csproj" />
-    <ProjectReference Include="..\Automation.Core\Automation.Core.csproj" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="111.0.5563.6400" />
   </ItemGroup>
 
 </Project>
