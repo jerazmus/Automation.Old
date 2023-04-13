@@ -6,6 +6,7 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Safari;
 using OpenQA.Selenium;
+using Microsoft.Playwright;
 
 namespace Automation.Core.UI.Selenium
 {
@@ -66,7 +67,7 @@ namespace Automation.Core.UI.Selenium
         // ---------------------------------------
 
         //
-        // Implementation of IBrowserActions interface using Selenium WebDriver
+        // Implementation of IBrowserActions interface using Selenium
         //
 
         #region Browser Actions
@@ -96,6 +97,33 @@ namespace Automation.Core.UI.Selenium
         {
             return this;
         }
+
+        public IBrowserActions Hover(string xpath)
+        {
+            return this;
+        }
+
+        public IBrowserActions HoverAndClick(string hoverXpath, string clickXpath)
+        {
+            return this;
+        }
+
+        public IBrowserActions DragAndDrop(string sourceXpath, string targetXpath, int? targetOffsetY = null)
+        {
+            return this;
+        }
+
+        public IBrowserActions Press(KeyboardKey key)
+        {
+            return this;
+        }
+
+        public IBrowserActions Upload(string xpath, string path)
+        {
+            return this;
+        }
+
+        // ---------------------------------------
 
         public IBrowserActions NavigateToUrl(string url)
         {
@@ -129,6 +157,13 @@ namespace Automation.Core.UI.Selenium
             });
         }
 
+        public IBrowserActions ExecuteScript(string script, bool throwOnError = true)
+        {
+            return this;
+        }
+
+        // ---------------------------------------
+
         public IBrowserActions AssertUrlContains(string expectedValue)
         {
             return Execute($"Assert URL contains '{expectedValue}'", () =>
@@ -143,6 +178,16 @@ namespace Automation.Core.UI.Selenium
             {
                 _driver.FindElement(By.XPath(xpath)).Text.Should().Be(expectedText);
             });
+        }
+
+        public IBrowserActions AssertValueEquals(string xpath, string expectedValue, bool isPartialValue = false, bool trim = false)
+        {
+            return this;
+        }
+
+        public IBrowserActions AssertAttributeEquals(string xpath, string attributeName, string expectedValue, bool isPartialValue = false, bool trim = false)
+        {
+            return this;
         }
 
         public IBrowserActions AssertIsDisplayed(string xpath)
@@ -167,6 +212,51 @@ namespace Automation.Core.UI.Selenium
                     Assert.True(true);
                 }
             });
+        }
+
+        public IBrowserActions AssertTextDisplayed(string expectedText, bool doubleQuotation = false)
+        {
+            return this;
+        }
+
+        public IBrowserActions AssertTextNotDisplayed(string expectedText)
+        {
+            return this;
+        }
+
+        public IBrowserActions AssertIsEnabled(string xpath)
+        {
+            return this;
+        }
+
+        public IBrowserActions AssertIsDisabled(string xpath)
+        {
+            return this;
+        }
+
+        // ---------------------------------------
+
+        public string GetUrl()
+        {
+            return _driver.Url;
+        }
+
+        // Get element's text
+        public string GetText(string name, WaitForSelectorState expectedState, bool onlyTextContent = false)
+        {
+            return string.Empty;
+        }
+
+        // Get text value of many elements (for example in dropdown list)
+        public List<string> GetElementsText(string name)
+        {
+            List<string> elementsText = null;
+
+            Execute($"Get text of elements {name}", () =>
+            {
+            });
+
+            return elementsText;
         }
         #endregion
     }
