@@ -7,13 +7,13 @@ namespace Automation.TestApp.Core.UI
 {
     public abstract class TestAppUITest : UITest
     {
-        // Get variables from SwagLabsTestSettings in a form of dictionary
+        // Get variables from TestAppTestSettings in a form of dictionary
         public TestAppTestSettings Settings { get; } = TestSettingsProvider.Get<TestAppTestSettings>();
 
         // ---------------------------------------
 
-        // Creates instancce of SwagLabs page, based on passed URL
-        public T GetSwagLabsPage<T>() where T : Page
+        // Creates instancce of TestApp page, based on passed URL
+        public T GetTestAppPage<T>() where T : Page
         {
             return GetPage<T>(Settings.Url);
         }
@@ -21,10 +21,10 @@ namespace Automation.TestApp.Core.UI
         // ---------------------------------------
 
         //
-        // Instances of any page in SwagLabs project
+        // Instances of any page in TestApp project
         //
 
         protected LoginPage LoginPage
-            => GetSwagLabsPage<LoginPage>();
+            => GetTestAppPage<LoginPage>();
     }
 }

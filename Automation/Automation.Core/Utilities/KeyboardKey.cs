@@ -1,4 +1,4 @@
-﻿namespace Automation.Core.UI
+﻿namespace Automation.Core.Utilities
 {
     public enum KeyboardKey
     {

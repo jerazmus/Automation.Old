@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using Automation.Core.Utilities;
+using Microsoft.Playwright;
 
 namespace Automation.Core.UI
 {
