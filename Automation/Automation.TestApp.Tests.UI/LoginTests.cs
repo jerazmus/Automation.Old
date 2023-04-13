@@ -1,4 +1,5 @@
 ﻿using Automation.TestApp.Core.UI;
+using Automation.TestApp.Core.Utilities;
 using NUnit.Framework;
 
 namespace Automation.TestApp.Tests.UI
@@ -13,7 +14,7 @@ namespace Automation.TestApp.Tests.UI
             LoginPage.Open();
 
             // When
-            LoginPage.Login(Settings.StandardUser, Settings.Password);
+            LoginPage.Login(UserProvider.StandardUser, UserProvider.Password);
 
             // Then
             AssertUrlContains("inventory");
