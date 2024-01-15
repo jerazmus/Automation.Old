@@ -1,13 +1,7 @@
 ﻿using Application.API.User.Model;
 using Application.API.User.Service;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace Application.API
@@ -31,7 +25,7 @@ namespace Application.API
             services.AddScoped<IUserCommandHandler, UserCommandHandler>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<UserContext>(opt =>
-                                               opt.UseSqlServer("Data Source=(local);Initial Catalog=Damera_DB;Integrated Security=True"));
+                                               opt.UseSqlServer("Data Source=(local);Initial Catalog=Application;Integrated Security=True"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

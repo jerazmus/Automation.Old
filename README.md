@@ -9,3 +9,5 @@
 ### If you're using Playwright for the first time, remember to navigate to solution folder using PowerShell and execute command:
 
 `pwsh Automation.Core\bin\Debug\net6.0\playwright.ps1 install`
+
+### For API tests there is a small API application prepared in the `Application/` folder. Further information about setting it up in the solution README file.

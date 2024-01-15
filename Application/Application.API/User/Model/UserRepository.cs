@@ -1,4 +1,5 @@
-﻿using Application.API.User.Model.Dto;
+﻿using Application.API.Exceptions;
+using Application.API.User.Model.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.API.User.Model
@@ -22,7 +23,7 @@ namespace Application.API.User.Model
 			var user = await _context.User.FindAsync(id);
 			if(user == null)
 			{
-				throw new Exception("User not found!");
+				throw new UserNotFoundException();
 			}
 			else
 			{
@@ -35,7 +36,7 @@ namespace Application.API.User.Model
 			var existingUser = await _context.User.FindAsync(user.Email);
 			if (existingUser != null)
 			{
-				throw new Exception("User with this email already exists!");
+				throw new EmailAlreadyExistsException();
 			}
 			else
 			{
@@ -45,7 +46,7 @@ namespace Application.API.User.Model
 				var newUser = await _context.User.FindAsync(guid);
 				if (newUser == null)
 				{
-					throw new Exception("A problem occurred when creating new user!");
+					throw new AddOrUpdateErrorException();
 				}
 				else
 				{
@@ -58,7 +59,7 @@ namespace Application.API.User.Model
 		{
 			if(_context.User.FindAsync(id).Result == null)
 			{
-				throw new Exception("User not found!");
+				throw new UserNotFoundException();
 			}
 			else
 			{
@@ -67,7 +68,7 @@ namespace Application.API.User.Model
 				var updatedUser = await _context.User.FindAsync(id);
 				if (updatedUser == null)
 				{
-                    throw new Exception("A problem occurred when updating new user!");
+					throw new AddOrUpdateErrorException();
                 }
 				else
 				{
@@ -81,7 +82,7 @@ namespace Application.API.User.Model
 			var user = await _context.User.FindAsync(id);
 			if (user == null)
 			{
-				throw new Exception("User not found!");
+				throw new UserNotFoundException();
 			}
 			else
 			{
