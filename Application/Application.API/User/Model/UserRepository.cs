@@ -14,9 +14,7 @@ namespace Application.API.User.Model
 		}
 
 		public async Task<IEnumerable<UserDto>> Get()
-		{
-			return await _context.User.ToListAsync();
-		}
+			=> await _context.User.ToListAsync();
 
 		public async Task<UserDto> Get(Guid id)
 		{
@@ -33,8 +31,8 @@ namespace Application.API.User.Model
 
 		public async Task<UserDto> Add(AddUserDto user)
 		{
-			var existingUser = await _context.User.FindAsync(user.Email);
-			if (existingUser != null)
+			var existingUsers = await _context.User.ToListAsync();
+			if (existingUsers.Any(u => u.Email == user.Email))
 			{
 				throw new EmailAlreadyExistsException();
 			}
@@ -43,15 +41,8 @@ namespace Application.API.User.Model
 				var guid = Guid.NewGuid();
                 _context.User.Add(new UserDto(guid, user));
 				await _context.SaveChangesAsync();
-				var newUser = await _context.User.FindAsync(guid);
-				if (newUser == null)
-				{
-					throw new AddOrUpdateErrorException();
-				}
-				else
-				{
-					return newUser;
-				}
+
+				return await Get(guid);
 			}
 		}
 
@@ -63,32 +54,19 @@ namespace Application.API.User.Model
 			}
 			else
 			{
-				_context.Entry(user).State = EntityState.Modified;
+				_context.ChangeTracker.Clear();
+				_context.Entry(new UserDto(id, user)).State = EntityState.Modified;
 				await _context.SaveChangesAsync();
-				var updatedUser = await _context.User.FindAsync(id);
-				if (updatedUser == null)
-				{
-					throw new AddOrUpdateErrorException();
-                }
-				else
-				{
-                    return updatedUser;
-                }
+
+				return await Get(id);
 			}
 		}
 
 		public async Task Delete(Guid id)
 		{
-			var user = await _context.User.FindAsync(id);
-			if (user == null)
-			{
-				throw new UserNotFoundException();
-			}
-			else
-			{
-				_context.User.Remove(user);
-				await _context.SaveChangesAsync();
-			}
+			var user = await Get(id);
+			_context.User.Remove(user);
+			await _context.SaveChangesAsync();
 		}
 	}
 }

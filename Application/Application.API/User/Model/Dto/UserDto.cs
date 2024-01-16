@@ -9,7 +9,8 @@
 
         public string Email { get; set; }
 
-        public UserDto(Guid id, AddUserDto user)
+        public UserDto() {}
+        public UserDto(Guid id, UserApiDto user)
         {
             Id = id;
             Name = user.Name;

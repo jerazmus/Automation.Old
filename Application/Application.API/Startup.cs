@@ -18,6 +18,10 @@ namespace Application.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
             services.AddCors();
             services.AddHttpContextAccessor();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -25,7 +29,7 @@ namespace Application.API
             services.AddScoped<IUserCommandHandler, UserCommandHandler>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<UserContext>(opt =>
-                                               opt.UseSqlServer("Data Source=(local);Initial Catalog=Application;Integrated Security=True"));
+                                               opt.UseSqlServer(config.GetConnectionString("ApplicationDb")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
