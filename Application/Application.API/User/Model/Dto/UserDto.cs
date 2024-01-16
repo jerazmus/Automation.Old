@@ -10,6 +10,7 @@
         public string Email { get; set; }
 
         public UserDto() {}
+
         public UserDto(Guid id, UserApiDto user)
         {
             Id = id;
