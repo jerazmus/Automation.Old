@@ -14,7 +14,7 @@ namespace Automation.TestApp.Tests.UI
             LoginPage.Open();
 
             // When
-            LoginPage.Login(UserProvider.StandardUser, UserProvider.Password);
+            LoginPage.Login(UserProvider.StandardUser);
 
             // Then
             AssertUrlContains("inventory");
@@ -39,11 +39,11 @@ namespace Automation.TestApp.Tests.UI
                 .Click(LoginPage.LoginButton)
                 .AssertTextEquals(LoginPage.Error, LoginPage.WrongCredentials);
 
-            Type(LoginPage.Username, "standard_user")
+            Type(LoginPage.Username, UserProvider.StandardUser.Username)
                 .Click(LoginPage.LoginButton)
                 .AssertTextEquals(LoginPage.Error, LoginPage.WrongCredentials);
 
-            Type(LoginPage.Password, "secret_sauce")
+            Type(LoginPage.Password, UserProvider.StandardUser.Password)
                 .Type(LoginPage.Username, "test")
                 .AssertTextEquals(LoginPage.Error, LoginPage.WrongCredentials);
 

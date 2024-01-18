@@ -11,7 +11,7 @@ namespace Automation.Core.UI.Playwright
 
         public static IBrowserContext Create(bool headless)
         {
-            TestLogger.Log("Create Playwright Driver");
+            TestLogger.Log("Create Playwright Browser");
 
             lock (_synchronizationObject)
             {

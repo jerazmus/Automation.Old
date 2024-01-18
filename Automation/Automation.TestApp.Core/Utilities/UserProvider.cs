@@ -2,10 +2,25 @@
 {
     public static class UserProvider
     {
-        public const string StandardUser = "standard_user";
-        public const string LockedOutUser = "locked_out_user";
-        public const string ProblemUser = "problem_user";
-        public const string PerformanceGlitchUser = "performance_glitch_user";
-        public const string Password = "secret_sauce";
+        public static User StandardUser 
+            => new ("standard_user");
+        public static User LockedOutUser
+            => new ("locked_out_user");
+        public static User ProblemUser
+            => new("problem_user");
+        public static User PerformanceGlitchUser
+             => new("performance_glitch_user");
+
+        public class User
+        {
+            public string Username { get; set; }
+            public string Password { get; set; }
+
+            public User(string username)
+            {
+                Username = username;
+                Password = "secret_sauce";
+            }
+        }
     }
 }

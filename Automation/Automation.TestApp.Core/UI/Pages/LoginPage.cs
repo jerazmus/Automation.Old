@@ -1,5 +1,7 @@
 ﻿using Automation.Core.UI;
 using Automation.Core.Utilities;
+using OpenQA.Selenium.DevTools;
+using static Automation.TestApp.Core.Utilities.UserProvider;
 
 namespace Automation.TestApp.Core.UI.Pages
 {
@@ -39,10 +41,10 @@ namespace Automation.TestApp.Core.UI.Pages
         // ---------------------------------------
 
         // Login method (using default values from 'automation.list' file)
-        public LoginPage Login(string username, string password)
+        public LoginPage Login(User user)
         {
-            Type(Username, username);
-            Type(Password, password);
+            Type(Username, user.Username);
+            Type(Password, user.Password);
             Click(LoginButton);
 
             return this;
