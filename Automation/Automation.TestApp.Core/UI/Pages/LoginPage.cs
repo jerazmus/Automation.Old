@@ -1,6 +1,5 @@
 ﻿using Automation.Core.UI;
 using Automation.Core.Utilities;
-using OpenQA.Selenium.DevTools;
 using static Automation.TestApp.Core.Utilities.UserProvider;
 
 namespace Automation.TestApp.Core.UI.Pages
