@@ -209,7 +209,7 @@ namespace Automation.Core.UI.Selenium
                 catch (NoSuchElementException)
                 {
                     TestLogger.Log("NoSuchElementException is taken as true");
-                    Assert.True(true);
+                    Assert.Pass();
                 }
             });
         }
