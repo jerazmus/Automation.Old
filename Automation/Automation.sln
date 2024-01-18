@@ -6,22 +6,19 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automation.Core", "Automation.Core\Automation.Core.csproj", "{9DA399D7-B227-4E2B-8E3E-EE2013AAC7FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E4425BB5-653B-43D6-9CA4-B83E566D7D8F}"
-	ProjectSection(SolutionItems) = preProject
-		automation.list = automation.list
-	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automation.TestApp.Core", "Automation.TestApp.Core\Automation.TestApp.Core.csproj", "{C8EED5BE-F468-4168-B792-085AC75860B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automation.TestApp.Core", "Automation.TestApp.Core\Automation.TestApp.Core.csproj", "{C8EED5BE-F468-4168-B792-085AC75860B5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9DA399D7-B227-4E2B-8E3E-EE2013AAC7FA} = {9DA399D7-B227-4E2B-8E3E-EE2013AAC7FA}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automation.TestApp.Tests.API", "Automation.TestApp.Tests.API\Automation.TestApp.Tests.API.csproj", "{0CE54502-87DF-487A-854A-42A19FF4823E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automation.TestApp.Tests.API", "Automation.TestApp.Tests.API\Automation.TestApp.Tests.API.csproj", "{0CE54502-87DF-487A-854A-42A19FF4823E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9DA399D7-B227-4E2B-8E3E-EE2013AAC7FA} = {9DA399D7-B227-4E2B-8E3E-EE2013AAC7FA}
 		{C8EED5BE-F468-4168-B792-085AC75860B5} = {C8EED5BE-F468-4168-B792-085AC75860B5}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automation.TestApp.Tests.UI", "Automation.TestApp.Tests.UI\Automation.TestApp.Tests.UI.csproj", "{CE17C873-7A49-45FD-B02B-64C51331A784}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automation.TestApp.Tests.UI", "Automation.TestApp.Tests.UI\Automation.TestApp.Tests.UI.csproj", "{CE17C873-7A49-45FD-B02B-64C51331A784}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9DA399D7-B227-4E2B-8E3E-EE2013AAC7FA} = {9DA399D7-B227-4E2B-8E3E-EE2013AAC7FA}
 		{C8EED5BE-F468-4168-B792-085AC75860B5} = {C8EED5BE-F468-4168-B792-085AC75860B5}

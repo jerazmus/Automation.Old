@@ -24,8 +24,8 @@ namespace Automation.Core.UI
             //_browser = new Browser(BrowserType.Chrome);
 
             // Playwright Browser
-            var settings = TestSettingsProvider.Get<TestSettings>();
-            var browserContext = Provider.Create(settings.UIHeadless);
+            var settings = TestSettingsProvider.Get();
+            var browserContext = Provider.Create(settings.Headless);
             _browser = new Browser(browserContext);
 
             TestLogger.Log("Open browser");

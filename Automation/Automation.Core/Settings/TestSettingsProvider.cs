@@ -1,22 +1,20 @@
-﻿using NUnit.Framework;
-using System.Collections.Concurrent;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace Automation.Core.Settings
 {
     public static class TestSettingsProvider
     {
-        private static ConcurrentDictionary<Type, TestSettings> _variables = new();
+        public static TestSettings Get()
+            => GetAppSettings();
 
-        // ---------------------------------------
-
-        // Creates instance of TestSettings object based on the settings file ('automation.list')
-        public static T Get<T>() where T : TestSettings
+        private static TestSettings GetAppSettings()
         {
-            return (T)_variables.GetOrAdd(typeof(T), (type) =>
-            {
-                var settingsFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "automation.list");
-                return (T)Activator.CreateInstance(type, settingsFilePath);
-            });
+            IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var testSettings = config.GetSection("TestSettings").Get<TestSettings>();
+            config.GetSection("TestSettings").Bind(testSettings);
+            return testSettings;
         }
     }
 }
