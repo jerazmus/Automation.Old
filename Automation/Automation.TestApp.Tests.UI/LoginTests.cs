@@ -24,7 +24,7 @@ namespace Automation.TestApp.Tests.UI
         [Category("Login-Tests-02")]
         public void Login_Validation()
         {
-            //Given
+            // Given
             LoginPage.Open();
 
             // When & Then

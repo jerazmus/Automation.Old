@@ -9,6 +9,8 @@ namespace Automation.Core.UI.Playwright
         private static IPlaywright _playwright;
         private static IBrowser _browser;
 
+        // Creates instance of Plawyright object, next based on it it creates browser with custom options
+        // and then it creates context for Playwright page with custom options as well 
         public static IBrowserContext Create(bool headless)
         {
             TestLogger.Log("Create Playwright Browser");

@@ -4,6 +4,8 @@ namespace Automation.Core.Settings
 {
     public class TestSettings
     {
+        // Model for TestSettings section of appsettings.json file
+
         [JsonProperty("Headless")]
         public bool Headless { get; set; }
 
@@ -13,6 +15,8 @@ namespace Automation.Core.Settings
 
     public class TestAppSettings
     {
+        // Model for application section of appsettings.json file
+
         [JsonProperty("UiUrl")]
         public string UiUrl { get; set; }
 
@@ -22,6 +26,8 @@ namespace Automation.Core.Settings
 
     public class Root
     {
+        // Model for root element of appsettings.json file
+
         [JsonProperty("TestSettings")]
         public TestSettings TestSettings { get; set; }
     }

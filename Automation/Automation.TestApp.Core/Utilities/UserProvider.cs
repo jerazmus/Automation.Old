@@ -2,6 +2,8 @@
 {
     public static class UserProvider
     {
+        // Class that provides all of the application users based on pre-created User objects
+        
         public static User StandardUser 
             => new ("standard_user");
         public static User LockedOutUser
