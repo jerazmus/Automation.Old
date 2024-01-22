@@ -38,7 +38,7 @@ namespace Application.Database.Dapper
         {
             var sql = @"USE Application;
                         CREATE TABLE [dbo].[User] ( 
-	                        Guid varchar(255) PRIMARY KEY,
+	                        Id uniqueidentifier PRIMARY KEY,
 	                        Name varchar(255),
 	                        Surname varchar(255),
 	                        Email varchar(255),
