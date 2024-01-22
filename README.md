@@ -11,7 +11,7 @@
 - used POP (Page Object Pattern) in this solution allowed to have an access to every single page object in your test methods by calling the `GetPage<T>` method, which created a new instance of page object each time the action on object was done. This helped with not creating page objects directly in test methods or required you to return page object in other page object's method.
 - `TestLogger` class was a useful little tool that allowed to log every action in the console in real time (with the implementation of every `IBrowserActions` method logging itself). Not really necessary with Playwright's built-in debugger tool.
 
-## If you want to run the solution globally:
+## If you want to run the solution locally:
 
 #### In `UITest` class there is an option to choose which testing tool you want to use. By default Playwright is the main tool, but if you want to change it to Selenium, just uncomment Selenium's browser implementation and comment Playwright's one (although Selenium lacks implementation for `IBrowserActions` interface methods in it's `Browser` class).
 
