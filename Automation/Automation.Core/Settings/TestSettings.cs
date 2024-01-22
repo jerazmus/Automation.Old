@@ -22,6 +22,12 @@ namespace Automation.Core.Settings
 
         [JsonProperty("ApiUrl")]
         public string ApiUrl { get; set; }
+
+        [JsonProperty("Username")]
+        public string Username { get; set; }
+
+        [JsonProperty("Password")]
+        public string Password { get; set; }
     }
 
     public class Root
