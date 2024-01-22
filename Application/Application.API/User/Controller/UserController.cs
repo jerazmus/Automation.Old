@@ -1,11 +1,13 @@
 ﻿using Application.API.User.Model.Dto;
 using Application.API.User.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Application.API.User.Controller
 {
     [Route("v1/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserCommandHandler _userCommandHandler;
