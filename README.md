@@ -1,6 +1,6 @@
 # Automation
 
-## One of the first template solution with implementation of different testing tools for many projects at the same time.
+## One of the first template solution I worked with, with implementation of different testing tools for many projects at the same time.
 
 #### The solution is pretty specific, because it was created with the idea of easily changing tools for UI testing - in this case Selenium and Playwright. The idea was created by real-world situation in which you have already written hundreds of tests and you want to implement new testing tool - in this case it was change from Selenium to Playwright. Because of the fact that Playwright is different, asynchronous and offers many built-in solutions, many workarounds were created to provide some kind of "abstract" layer of framework which enabled to use asynchronous Playwright in synchronous way. While not a good practice, the idea itself was a nice learning case, even if ultimately it was abandoned.
 
